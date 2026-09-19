@@ -21,50 +21,99 @@ export function PublicNav({ name }: { name: string }) {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-paper/85 backdrop-blur">
       <div className="mx-auto flex max-w-page items-center justify-between px-6 py-4">
-        <Link href="/" className="font-display text-lg italic text-ink focus-ring" onClick={() => setOpen(false)}>
+        <Link
+          href="/"
+          className="font-display text-lg italic text-ink focus-ring"
+          onClick={() => setOpen(false)}
+        >
           {name}
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">
-          {links.map((l) => (
+          {links.map((link) => (
             <Link
-              key={l.href}
-              href={l.href}
+              key={link.href}
+              href={link.href}
               className={cn(
                 'text-sm transition-colors focus-ring',
-                pathname === l.href ? 'text-ink' : 'text-muted hover:text-ink'
+                pathname === link.href
+                  ? 'text-ink'
+                  : 'text-muted hover:text-ink'
               )}
             >
-              {l.label}
+              {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-3 md:flex">
           <ThemeToggle />
-          <Link href="/login?next=/private" className="text-sm text-muted hover:text-ink focus-ring">
-            Private space →
+
+          <Link
+            href="/login?next=/private"
+            className="rounded-full px-4 py-2 text-sm text-muted transition-colors hover:bg-line/40 hover:text-ink focus-ring"
+          >
+            Sign in
+          </Link>
+
+          <Link
+            href="/signup"
+            className="rounded-full bg-ink px-4 py-2 text-sm text-paper transition-opacity hover:opacity-85 focus-ring"
+          >
+            Sign up
           </Link>
         </div>
 
-        <button className="md:hidden focus-ring" onClick={() => setOpen((v) => !v)} aria-label="Toggle menu">
+        <button
+          type="button"
+          className="md:hidden focus-ring"
+          onClick={() => setOpen((value) => !value)}
+          aria-label="Toggle menu"
+          aria-expanded={open}
+        >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
       {open && (
-        <nav className="border-t border-line px-6 py-4 md:hidden">
+        <nav className="border-t border-line px-6 py-5 md:hidden">
           <div className="flex flex-col gap-4">
-            {links.map((l) => (
-              <Link key={l.href} href={l.href} className="text-sm text-ink" onClick={() => setOpen(false)}>
-                {l.label}
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  'text-sm transition-colors',
+                  pathname === link.href
+                    ? 'text-ink'
+                    : 'text-muted hover:text-ink'
+                )}
+                onClick={() => setOpen(false)}
+              >
+                {link.label}
               </Link>
             ))}
-            <div className="flex items-center justify-between pt-2">
-              <Link href="/login?next=/private" className="text-sm text-muted">
-                Private space →
+
+            <div className="mt-2 flex items-center gap-3 border-t border-line pt-4">
+              <Link
+                href="/login?next=/private"
+                className="rounded-full border border-line px-4 py-2 text-sm text-ink transition-colors hover:bg-line/30"
+                onClick={() => setOpen(false)}
+              >
+                Sign in
               </Link>
-              <ThemeToggle />
+
+              <Link
+                href="/signup"
+                className="rounded-full bg-ink px-4 py-2 text-sm text-paper transition-opacity hover:opacity-85"
+                onClick={() => setOpen(false)}
+              >
+                Sign up
+              </Link>
+
+              <div className="ml-auto">
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         </nav>

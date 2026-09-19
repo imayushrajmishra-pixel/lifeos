@@ -141,24 +141,7 @@ export async function POST(request: Request) {
         { status: 401 }
       );
     }
-
-    // ---------------------------------------------------------------
-    // OWNER CHECK
-    // ---------------------------------------------------------------
-
-    const {
-      data: isOwner,
-      error: ownerError,
-    } = await supabase.rpc('is_owner');
-
-    if (ownerError || !isOwner) {
-      return NextResponse.json(
-        {
-          error: 'This account is not authorized.',
-        },
-        { status: 403 }
-      );
-    }
+    
 
     // ---------------------------------------------------------------
     // REQUEST
