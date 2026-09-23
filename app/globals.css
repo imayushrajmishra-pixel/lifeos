@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ :root {
+  --paper: 247 250 255;
+  --surface: 255 255 255;
+  --ink: 15 31 56;
+  --muted: 86 106 133;
+  --line: 218 229 244;
+  --moss: 37 99 235;
+  --gold: 59 130 246;
+  --rust: 96 165 250;
+}
+
+.dark {
+  --paper: 7 15 30;
+  --surface: 14 26 47;
+  --ink: 235 244 255;
+  --muted: 153 174 202;
+  --line: 36 58 88;
+  --moss: 96 165 250;
+  --gold: 125 183 255;
+  --rust: 147 197 253;
+}
+
+* { border-color: rgb(var(--line)); }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: rgb(var(--paper));
+  color: rgb(var(--ink));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid rgb(var(--moss));
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: rgb(var(--moss) / 0.25);
+}
